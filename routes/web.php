@@ -8,6 +8,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\DokterController;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\InpatientController;
 
 
 Route::get('/', function () {
@@ -27,6 +28,9 @@ Route::middleware([
 ])->group(function () {
 
     Route::resource('users', UserController::class);
+
+
+Route::resource('inpatients', InpatientController::class);
     // routes/web.php
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
@@ -52,7 +56,6 @@ Route::get('/dashboard-user', function () {
         'userRole' => $userRole,  // Data role pengguna
     ]);
 })->name('dashboard-user');
-
 
 
 
@@ -93,6 +96,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('patients/{patient}', [PatientController::class, 'show'])->name('patients.show');
     Route::get('patients', [PatientController::class, 'index'])->name('patients.index');
 });
+
+
+
+
 
 
 
